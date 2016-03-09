@@ -4,6 +4,9 @@ virtualenv_serc/
 # Personal local database
 website/db.sqlite3
 
+# Pycharm <3
+.idea/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
