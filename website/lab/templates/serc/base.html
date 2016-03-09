@@ -1,0 +1,102 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{% block title %}{% endblock title %}</title>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="icon" href="{% static "images/favicon.ico" %}">
+    <link rel="stylesheet" href="{% static "css/grid.css" %}">
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <link rel="stylesheet" href="{% static "css/camera.css" %}">
+    <link rel="stylesheet" href="{% static "css/owl-carousel.css" %}">
+    <script src="{% static "js/jquery.js" %}"></script>
+    <script src="{% static "js/jquery-migrate-1.2.1.js" %}"></script>
+    <script src="{% static "js/device.min.js" %}"></script>
+  </head>
+  <body>
+    <div class="page">
+      <!--
+      ========================================================
+      							HEADER
+      ========================================================
+      
+      
+      -->
+      <header>
+        <div class="container">
+          <div class="brand">
+            <h1 class="brand_name"><img src="{% static "images/logo.jpg" %}"></h1>
+            <p class="brand_slogan">Software Engineering Research Center</p>
+          </div>
+          <div class="search_box">
+            <form action="/search">
+              <input type="text" placeholder="Search..." name="text" />
+            </form>
+          </div>
+        </div>
+        {% if user.is_authenticated %}
+          <div class="login_box_menu">Welcome! <b>{{user}}</b> (<a href="{% url 'logout' %}">Logout</a>)</div>
+        {% else %}
+          <div class="login_box_menu">Welcome! <b>Guest</b> (<a href="{% url 'login' %}">Login</a>)</div>
+        {% endif %}
+        <div id="stuck_container" class="stuck_container">
+          <div class="container">
+            <nav class="nav">
+              <ul data-type="navbar" class="sf-menu">
+                <li class="active"><a href="">Home</a>
+                </li>
+                <li><a href="index-1.html">People</a>
+                  <ul>
+                    <li><a href="#">Faculty</a></li>
+                    <li><a href="#">Staff</a></li>
+                    <li><a href="#">PHD Students</a></li>
+                    <li><a href="#">MS by Research</a></li>
+                    <li><a href="#">Graduated</a></li>
+                  </ul>
+                </li>
+                <li><a href="index-1.html">Research</a>
+                  <ul>
+                    <li><a href="#">Faculty</a></li>
+                    <li><a href="#">Staff</a></li>
+                    <li><a href="#">PHD Students</a></li>
+                    <li><a href="#">MS by Research</a></li>
+                    <li><a href="#">Graduated</a></li>
+                  </ul>
+                </li>
+                <li><a href="index-2.html">Services</a>
+                </li>
+                <li><a href="index-3.html">FAQS</a>
+                </li>
+                <li><a href="index-4.html">Contacts</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </header>
+      <!--
+      ========================================================
+                                  CONTENT
+      ========================================================
+      -->
+      <main>
+      {% block content %}{% endblock content %}
+      </main>
+      <!--
+      ========================================================
+                                  FOOTER
+      ========================================================
+      -->
+      <footer>
+        <section>
+          <div class="container">
+            <div class="copyright">© <span id="copyright-year">2016</span> Software Engineering Research Center (SERC), IIIT-Hyderabad.<div class="social"><a href="#"><img src="{% static "images/google.png" %}"></a><a href="#"><img src="{% static "images/linkedin.png" %}"></a><a href="#"><img src="{% static "images/facebook.png" %}"></a></div>
+            </div>
+          </div>
+        </section>
+      </footer>
+    </div>
+    <script src="{% static "js/script.js" %}"></script>
+  </body>
+</html>
