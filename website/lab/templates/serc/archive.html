@@ -1,0 +1,23 @@
+{% extends "serc/base.html" %}
+{% block content %}
+    <section class="well ins5">
+        <div class="container">
+        <h2>Updates Archive</h2>
+        <div class="row off4">
+            <div class="grid_12">
+                <ul class="update-list">
+                    {% for update in news %}
+                    <li>
+                        {{update}}<br>
+                        <span>{{update.description}}</span>
+                        {% if update.link|length > 0 %}
+                            <br><a href="{{update.link}}" target="_blank" rel="nofollow">More</a>
+                        {% endif %}
+                        <span style="float:right;font-size:10px">{{update.visible_from_date}}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

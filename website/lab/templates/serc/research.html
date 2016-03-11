@@ -1,0 +1,82 @@
+{% extends "serc/base.html" %}
+{% block content %}
+    <section class="well1">
+        <div class="container">
+            <div class="row off1">
+                <div class="grid_12">
+                    <h2>Research</h2>
+                    To lead the software engineering research in India by addressing India specific issues in an industry driven environment.The SERL is a research and development center at IIIT Hyderabad conducting research in various domains of software engineering. The main objectives of SERL are to promote quality software development at universities through University Software Development Center and to operate closely with the industry by estabilishing touch points.
+                    <hr>
+                    <h3>Publications</h3>
+                    {% for category, publications in publications_organized.items %}
+                    <h4>{{category}}</h4>
+                    <ul class="publications" id="dynatable_{{category|slugify}}" class="row-fluid">
+                        {% for publication in publications %}
+                        <li class="span4" data-color="gray">
+                            <div><span class="authors">{{publication.authors|safe}}</span>: <span class="title">{{publication.title}}</span> <span class="location">{{publication.published_at}} {{publication.published_year}}</span>: <span class="page">{{publication.published_page}}</span> <a href="{{publication.link}}" target="_blank" rel="nofollow" class="link"><i class="fa fa-external-link"></i></a></div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <hr>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <link rel="stylesheet" href="/static/css/jquery.dynatable.css">
+    <script src="/static/js/jquery.dynatable.js"></script>
+    <script>
+        (function ($) {
+            function publicationWriter(rowIndex, record, columns, cellWriter) {
+            var cssClass = "span4", li;
+            li = '<div><li class="' + cssClass + '"><span class="authors">' + record.authors + '</span>: <span class="title">"' + record.title + '"</span> <span class="location">' + record.location + '</span> (pp. <span class="page">' + record.page + '</span>) <a href="' + record.link + '" target="_blank" rel="nofollow" class="link" '+ record.link_present +'><i class="fa fa-external-link"></i></a></div>';
+            return li;
+        }
+
+        // Function that creates our records from the DOM when the page is loaded
+        function publicationReader(index, li, record) {
+            var $li = $(li);
+            try {
+                var $a = $li.find("a.link")[0];
+                console.log($li)
+                var link = $a.href;
+                var present = "";
+            }
+            catch(e) {
+                var link = "#";
+                var present = "style='display: none;'";
+            }
+            console.log(link);
+            console.log(present);
+            record.authors = $li.find('.authors').html();
+            record.title = $li.find('.title').text();
+            record.location = $li.find('.location').text();
+            record.page = $li.find('.page').text();
+            record.year = $li.find('.year').text();
+            record.link = link;
+            record.link_present = present;
+        }
+        {% for category in publications_organized %}
+        $('#dynatable_{{category|slugify}}').dynatable({
+            table: {
+                bodyRowSelector: 'li'
+            },
+            dataset: {
+                perPageDefault: 20,
+                perPageOptions: [10, 20, 30, 40, 50, 100]
+            },
+            writers: {
+                _rowWriter: publicationWriter
+            },
+            readers: {
+                _rowReader: publicationReader
+            },
+            params: {
+                records: 'publications'
+            }
+        });
+        {% endfor %}
+    })(jQuery);
+    </script>
+{% endblock content %}

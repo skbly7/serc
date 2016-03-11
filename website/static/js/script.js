@@ -9,18 +9,18 @@ function isIE() {
 
 /* cookie.JS
  ========================================================*/
-include('js/jquery.cookie.js');
+include('/static/js/jquery.cookie.js');
 
 /* Easing library
  ========================================================*/
-include('js/jquery.easing.1.3.js');
+include('/static/js/jquery.easing.1.3.js');
 
-/* PointerEvents  
+/* PointerEvents
  ========================================================*/
 ;
 (function ($) {
     if(isIE() && isIE() < 11){ 
-        include('js/pointer-events.js');
+        include('/static/js/pointer-events.js');
         $('html').addClass('lt-ie11'); 
         $(document).ready(function(){
             PointerEventsPolyfill.initialize({});
@@ -34,7 +34,7 @@ include('js/jquery.easing.1.3.js');
 (function ($) {
     var o = $('html');
     if (o.hasClass('desktop')) {
-        include('js/tmstickup.js');
+        include('/static/js/tmstickup.js');
 
         $(document).ready(function () {
             $('#stuck_container').TMStickUp({})
@@ -48,7 +48,7 @@ include('js/jquery.easing.1.3.js');
 (function ($) {
     var o = $('html');
     if (o.hasClass('desktop')) {
-        include('js/jquery.ui.totop.js');
+        include('/static/js/jquery.ui.totop.js');
 
         $(document).ready(function () {
             $().UItoTop({
@@ -65,7 +65,7 @@ include('js/jquery.easing.1.3.js');
 (function ($) {
     var o = $('[data-equal-group]');
     if (o.length > 0) {
-        include('js/jquery.equalheights.js');
+        include('/static/js/jquery.equalheights.js');
     }
 })(jQuery);
 
@@ -75,8 +75,8 @@ include('js/jquery.easing.1.3.js');
 (function ($) {
     var o = $('html');
     if (o.hasClass('desktop')) {
-        include('js/jquery.mousewheel.min.js');
-        include('js/jquery.simplr.smoothscroll.min.js');
+        include('/static/js/jquery.mousewheel.min.js');
+        include('/static/js/jquery.simplr.smoothscroll.min.js');
 
         $(document).ready(function () {
             $.srSmoothscroll({
@@ -102,14 +102,14 @@ include('js/jquery.easing.1.3.js');
  ========================================================*/
 ;
 (function ($) {
-    include('js/superfish.js');    
+    include('/static/js/superfish.js');    
 })(jQuery);
 
 /* Navbar
  ========================================================*/
 ;
 (function ($) {
-    include('js/jquery.rd-navbar.js');
+    include('/static/js/jquery.rd-navbar.js');
 })(jQuery);
 
 
@@ -120,7 +120,7 @@ include('js/jquery.easing.1.3.js');
     var o = document.getElementById("google-map");
     if (o) {
         include('//maps.google.com/maps/api/js?sensor=false');
-        include('js/jquery.rd-google-map.js');
+        include('/static/js/jquery.rd-google-map.js');
 
         $(document).ready(function () {
             var o = $('#google-map');
@@ -142,7 +142,7 @@ include('js/jquery.easing.1.3.js');
 
     if ((navigator.userAgent.toLowerCase().indexOf('msie') == -1 ) || (isIE() && isIE() > 9)) {
         if (o.hasClass('desktop')) {
-            include('js/wow.js');
+            include('/static/js/wow.js');
 
             $(document).ready(function () {
                 new WOW().init();
@@ -157,8 +157,8 @@ include('js/jquery.easing.1.3.js');
 (function ($) {
     var o = $('#contact-form');
     if (o.length > 0) {
-        include('js/modal.js');
-        include('js/TMForm.js'); 
+        include('/static/js/modal.js');
+        include('/static/js/TMForm.js'); 
 
         if($('#contact-form .recaptcha').length > 0){
         	include('//www.google.com/recaptcha/api/js/recaptcha_ajax.js');
@@ -220,10 +220,10 @@ document.write('<meta name="viewport" content="width=device-width,initial-scale=
 var o = $('#camera');
     if (o.length > 0) {
         if (!(isIE() && (isIE() > 9))) {
-            include('js/jquery.mobile.customized.min.js');
+            include('/static/js/jquery.mobile.customized.min.js');
         }
 
-        include('js/camera.js');
+        include('/static/js/camera.js');
 
         $(document).ready(function () {
             o.camera({
@@ -249,7 +249,7 @@ var o = $('#camera');
 ;(function ($) {
     var o = $('.owl-carousel');
     if (o.length > 0) {
-        include('js/owl.carousel.min.js');
+        include('/static/js/owl.carousel.min.js');
         $(document).ready(function () {
             o.owlCarousel({
                 margin: 30,
@@ -269,9 +269,62 @@ var o = $('#camera');
     }
 })(jQuery);
 
-/* Mailform
+/* Accordion
 =============================================*/
-;(function ($) {
-    include('js/mailform/jquery.form.min.js');
-    include('js/mailform/jquery.rd-mailform.min.c.js');
+;(function(){
+    var d = document,
+    accordionToggles = d.querySelectorAll('.js-accordionTrigger'),
+    setAria,
+    setAccordionAria,
+    switchAccordion,
+    touchSupported = ('ontouchstart' in window),
+    pointerSupported = ('pointerdown' in window);
+
+    skipClickDelay = function(e){
+        e.preventDefault();
+        e.target.click();
+    };
+
+    setAriaAttr = function(el, ariaType, newProperty){
+		el.setAttribute(ariaType, newProperty);
+	};
+	setAccordionAria = function(el1, el2, expanded){
+        switch(expanded) {
+            case "true":
+                setAriaAttr(el1, 'aria-expanded', 'true');
+                setAriaAttr(el2, 'aria-hidden', 'false');
+            break;
+            case "false":
+                setAriaAttr(el1, 'aria-expanded', 'false');
+                setAriaAttr(el2, 'aria-hidden', 'true');
+            break;
+            default:
+                break;
+        }
+	};
+    switchAccordion = function(e) {
+        e.preventDefault();
+        var thisAnswer = e.target.parentNode.nextElementSibling;
+        var thisQuestion = e.target;
+        if(thisAnswer.classList.contains('is-collapsed')) {
+            setAccordionAria(thisQuestion, thisAnswer, 'true');
+        } else {
+            setAccordionAria(thisQuestion, thisAnswer, 'false');
+        }
+        thisQuestion.classList.toggle('is-collapsed');
+        thisQuestion.classList.toggle('is-expanded');
+        thisAnswer.classList.toggle('is-collapsed');
+        thisAnswer.classList.toggle('is-expanded');
+
+        thisAnswer.classList.toggle('animateIn');
+    };
+    for (var i=0,len=accordionToggles.length; i<len; i++) {
+        if(touchSupported) {
+            accordionToggles[i].addEventListener('touchstart', skipClickDelay, false);
+        }
+        if(pointerSupported){
+            accordionToggles[i].addEventListener('pointerdown', skipClickDelay, false);
+        }
+            accordionToggles[i].addEventListener('click', switchAccordion, false);
+    }
 })(jQuery);

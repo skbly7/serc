@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'lab'
+    'lab',
+    'django_cas'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -49,7 +50,13 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_cas.middleware.CASMiddleware',
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'django_cas.backends.CASBackend'
+)
 
 ROOT_URLCONF = 'website.urls'
 
@@ -123,3 +130,8 @@ USE_TZ = False
 STATIC_ROOT = ''
 STATIC_URL = '/static/'
 STATICFILES_DIRS = ( os.path.join('static'), )
+
+CAS_SERVER_URL = 'https://login.iiit.ac.in/cas/'
+CAS_REDIRECT_URL = '/'
+CAS_AUTO_CREATE_USERS = True
+CAS_RENEW = True

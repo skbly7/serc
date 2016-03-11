@@ -16,13 +16,19 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.conf.urls import include
-import lab.views as views_site
 handler404 = 'lab.views.custom_404'
 
 urlpatterns = [
     url(r'^api/', include('lab.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views_site.index, name='index'),
-    url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}, name='logout'),
-    url(r'^login/$', 'django.contrib.auth.views.login', name='login'),
+    url(r'^$', 'lab.views.index', name='index'),
+    url(r'^about/$', 'lab.views.about', name='about'),
+    url(r'^services/$', 'lab.views.service', name='services'),
+    url(r'^research/$', 'lab.views.research', name='research'),
+    url(r'^contact/$', 'lab.views.contact', name='contact'),
+    url(r'^people/(?P<type>[a-z]+)/$', 'lab.views.people', name='people'),
+    url(r'^personal/(?P<name>[a-z.]+)/$', 'lab.views.personal', name='personal'),
+    url(r'^logout/$', 'django_cas.views.logout', name='logout'),
+    url(r'^login/$', 'django_cas.views.login', name='login'),
+    url(r'^archive/$', 'lab.views.archive', name='archive'),
 ]

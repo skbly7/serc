@@ -17,17 +17,17 @@
             mapClass: 'map_model',
             locationsClass: 'map_locations',
             marker: {
-                basic: 'images/gmap_marker.png',
-                active: 'images/gmap_marker_active.png'
+                basic: '/static/images/gmap_marker.png',
+                active: '/static/images/gmap_marker_active.png'
             },
             styles: []
         },
 
         defaults = {
             map: {
-                x: -73.9924068,
-                y: 40.646197,
-                zoom: 14
+                x: 78.3484871,
+                y: 17.447257,
+                zoom: 17
             },
             locations: []
         };

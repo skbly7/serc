@@ -1,6 +1,6 @@
 @charset "UTF-8";
 @import url(animate.css);
-@import url(//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css);
+@import url(font-awesome.min.css);
 @import url(//fonts.googleapis.com/css?family=Roboto:400,500,700);
 /*========================================================
 					  Main Styles
@@ -298,8 +298,8 @@ p + .btn_wr {
 }
 
 .bg-image {
-  background: url(../images/page-3_bg.jpg) center no-repeat;
-  background-size: cover;
+  background: url(/static/images/logo_big.jpg) no-repeat;
+  background-size: 40%;
 }
 .bg-image p {
   font-size: 16px;
@@ -1361,4 +1361,212 @@ footer .copyright a:hover {
 .social img {
   width: 32px;
   height: 32px;
+}
+.banner-slide {
+  width: 100%
+}
+.recent_news {
+  font-size: 20px;
+  background: #434547;
+  color: white;
+  padding: 0px 10px;
+}
+.accordion dl,
+.accordion-list {
+   border:1px solid #ddd;
+   &:after {
+       content: "";
+       display:block;
+       height:1em;
+       width:100%;
+       background-color:darken(#38cc70, 10%);
+     }
+}
+.accordion dd,
+.accordion__panel {
+   background-color:#eee;
+   font-size:1em;
+   line-height:1.5em;
+}
+.accordion p {
+  padding:1em 2em 1em 2em;
+}
+.accordion li {
+  padding:0.2em 1em 0.2em 1em;
+  border-bottom: 1px solid #787878;
+}
+.accordion {
+  position:relative;
+  background-color:#eee;
+}
+.accordionTitle,
+.accordion__Heading {
+  font-weight: 700;
+  padding: 10px 10px;
+  display: block;
+  text-decoration: none;
+  transition: background-color 0.5s ease-in-out;
+  border-bottom: 1px solid #434547;
+}
+.accordionTitle span,
+.accordion__Heading span {
+  font-size: 9px;
+  float: right;
+  padding-top: 10px;
+}
+.accordionTitle:hover {
+  background-color: #aaa;
+}
+.accordionTitleActive,
+.accordionTitle.is-expanded {
+  background-color: #62bfe6 !important;
+  color: white;
+  padding-left: 25px;
+  border-bottom: 0px;
+    &:before {
+      transform:rotate(-225deg);
+    }
+}
+.accordionTitleActive .fa,
+.accordionTitle.is-expanded .fa {
+  display: none;
+}
+.accordionItem {
+    height:auto;
+    overflow:hidden;
+    //SHAME: magic number to allow the accordion to animate
+
+     max-height:50em;
+    transition:max-height 1s;
+
+
+    @media screen and (min-width:48em) {
+         max-height:15em;
+        transition:max-height 0.5s
+
+    }
+
+
+}
+
+.accordionItem.is-collapsed {
+    max-height:0;
+}
+.accordion-content a {
+  color: midnightblue !important;
+}
+.no-js .accordionItem.is-collapsed {
+  max-height: auto;
+}
+.animateIn {
+     animation: accordionIn 0.45s normal ease-in-out both 1;
+}
+.animateOut {
+     animation: accordionOut 0.45s alternate ease-in-out both 1;
+}
+@keyframes accordionIn {
+  0% {
+    opacity: 0;
+    transform:scale(0.9) rotateX(-60deg);
+    transform-origin: 50% 0;
+  }
+  100% {
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+@keyframes accordionOut {
+    0% {
+       opacity: 1;
+       transform:scale(1);
+     }
+     100% {
+          opacity:0;
+           transform:scale(0.9) rotateX(-60deg);
+       }
+}
+
+.peoples img {
+  width: 100%;
+  height: 200px;
+  border: 2px solid;
+}
+.peoples h4 {
+  padding-top: 10px;
+  padding-left: 5px;
+}
+.peoples h4 a {
+  color: #0b1599;
+}
+.peoples span {
+  clear: both;
+  padding-left:5px;
+}
+.archive {
+  float:right
+}
+.archive i {
+  padding-right:2px;
+}
+.update-list li {
+  padding-left: 0px;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
+  padding: 15px 0px;
+  border-bottom: 1px solid;
+  color: #17739A;
+}
+.update-list li span{
+  font-weight: normal;
+  color: black;
+  font-size: 14px;
+}
+.update-list li a{
+  font-weight: normal;
+  font-size: 14px;
+}
+.personal_page p{
+  text-align: justify;
+  line-height: 20px;
+  padding-bottom: 15px;
+}
+.social_personal img {
+  padding-top: 5px;
+  padding-right: 5px;
+}
+.social_personal i {
+  padding-top: 5px;
+  padding-right: 5px;
+  font-size: 32px;
+}
+.social_personal b {
+  font-weight: bold;
+}
+.image_personal img {
+  width: 100%;
+  max-height: 200px;
+}
+.small_margins {
+  margin: 5px 0px;
+  margin-bottom: 0px;
+}
+.publications .title {
+  font-weight: bold;
+}
+.dynatable-pagination-links a {
+  padding: 1px 10px;
+}
+.publications div {
+  display: inline-block;
+}
+.dynatable-active-page {
+  background-color: #5AB7DE !important;
+}
+.publications .location {
+  font-style: italic;
+}
+.authors a {
+  color: #0b1599;
 }

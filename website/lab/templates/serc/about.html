@@ -1,0 +1,42 @@
+{% extends "serc/base.html" %}
+{% block content %}
+<section class="well1">
+    <div class="container">
+        <div class="row">
+            <div class="grid_12">
+                <h2>About</h2>
+                {{about_us|safe}}
+            </div>
+        </div>
+    </div>
+</section>
+<section class="well1 ins4 bg-image">
+    <div class="container">
+        <div class="row">
+            <div class="grid_7 preffix_5">
+                <h2>Research Areas</h2>
+                <div class="row off4">
+                    <div class="grid_3">
+                        <ul class="marked-list wow fadeInRight">
+                            <li><a href="#">Software architectures</a></li>
+                            <li><a href="#">Software reuse</a></li>
+                            <li><a href="#">Software engineering education</a></li>
+                            <li><a href="#">Programming languages</a></li>
+                            <li><a href="#">Mathematical computer science</a></li>
+                        </ul>
+                    </div>
+                    <div class="grid_3">
+                        <ul data-wow-delay="0.2s" class="marked-list wow fadeInRight">
+                            <li><a href="#">Technology for education</a></li>
+                            <li><a href="#">Model driven development</a></li>
+                            <li><a href="#">Process engineering</a></li>
+                            <li><a href="#">Semantic web architectures</a></li>
+                            <li><a href="#">Human computer interaction</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
