@@ -63,7 +63,7 @@ class People(models.Model):
 
 class ShortNames(models.Model):
     name = models.CharField(max_length=30)
-    profile = models.ForeignKey(People, blank=True)
+    profile = models.ForeignKey(People, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -81,7 +81,7 @@ class ConferenceType(models.Model):
         return self.name
 
 class Publication(models.Model):
-    author = models.ManyToManyField(ShortNames)
+    authors_comma_separated = models.CharField(default='', max_length=500)
     conf_type = models.ForeignKey(ConferenceType)
     published_at = models.CharField(max_length=200)
     published_page = models.CharField(max_length=20)
@@ -93,11 +93,30 @@ class Publication(models.Model):
         return self.title
 
     def authors(self):
-        authors = self.author.all()
         list = []
-        for author in authors:
+        all_authors = self.authors_comma_separated.split(',')
+        for author in all_authors:
+            author = ShortNames.objects.get(name=author.strip())
+            print author
             list.append(author.display())
-        return ','.join(list)
+        return ', '.join(list)
+
+    def save(self, *args, **kwargs):
+        super(Publication, self).save(*args, **kwargs)
+        all_authors = self.authors_comma_separated.split(',')
+        ShortNamePublicationMapping.objects.filter(paper=self).delete()
+        for author in all_authors:
+            author = author.strip()
+            if author == "":
+                continue
+            short_name, created = ShortNames.objects.get_or_create(name=author)
+            mapping = ShortNamePublicationMapping(short_name=short_name, paper=self)
+            mapping.save()
+
+
+class ShortNamePublicationMapping(models.Model):
+    short_name = models.ForeignKey(ShortNames)
+    paper = models.ForeignKey(Publication)
 
 
 

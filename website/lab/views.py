@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.http import Http404
 from django.template import loader
 import json
-from .models import News, Banner, SiteTextData, People, PeopleType, ShortNames, Publication, ConferenceType
+from .models import News, Banner, SiteTextData, People, PeopleType, ShortNames, Publication, ConferenceType, ShortNamePublicationMapping
 from django.utils import timezone
 
 # Create your views here.
@@ -103,12 +103,20 @@ def personal(request, name):
     except:
         raise Http404
     short_names = ShortNames.objects.filter(profile=person_object)
-    publications = Publication.objects.filter(author__in=short_names)
+    publications = ShortNamePublicationMapping.objects.filter(short_name__in=short_names).values_list('paper', flat=True).distinct()
     publications_organized = {}
+    print publications[0]
     for publication in publications:
+        try:
+            publication = Publication.objects.get(pk=publication)
+        except:
+            continue
         if publication.conf_type.name not in publications_organized:
             publications_organized[publication.conf_type.name] = []
         publications_organized[publication.conf_type.name].append(publication)
+    # Sorting for year wise paper display
+    for key in publications_organized:
+        publications_organized[key].sort(key=lambda x: x.published_year, reverse=True)
     context = {
         'PAGE_TITLE': person_object.name,
         'person': person_object,
@@ -125,6 +133,9 @@ def research(request):
         if publication.conf_type.name not in publications_organized:
             publications_organized[publication.conf_type.name] = []
         publications_organized[publication.conf_type.name].append(publication)
+    # Sorting for year wise paper display
+    for key in publications_organized:
+        publications_organized[key].sort(key=lambda x: x.published_year, reverse=True)
     context = {
         'PAGE_TITLE': 'Research',
         'publications_organized': publications_organized
