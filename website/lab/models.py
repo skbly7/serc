@@ -97,7 +97,6 @@ class Publication(models.Model):
         all_authors = self.authors_comma_separated.split(',')
         for author in all_authors:
             author = ShortNames.objects.get(name=author.strip())
-            print author
             list.append(author.display())
         return ', '.join(list)
 
