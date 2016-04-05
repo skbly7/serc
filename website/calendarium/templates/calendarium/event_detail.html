@@ -1,0 +1,27 @@
+{% extends "lab/calendar.html" %}
+{% load i18n %}
+{% load static %}
+{% block main %}
+<h1>{{ object }}</h1>
+<table>
+    <tr>
+        <th>{% trans "Start" %}</th>
+        <td>{{ object.start }}</td>
+    </tr>
+    <tr>
+        <th>{% trans "End" %}</th>
+        <td>{{ object.end }}</td>
+    </tr>
+    <tr>
+        <th>{% trans "Category" %}</th>
+        <td>{{ object.category }}</td>
+    </tr>
+    <tr>
+        <th>{% trans "Description" %}</th>
+        <td>{{ object.description }}</td>
+    </tr>
+</table>
+<br/>
+<input class="btn btn-default" onclick="javascript:history.back();" value="{% trans "Back" %}" />
+<div style="float:right"><a href="?download=1">Download <img src="{% static "images/ical.jpg" %}" style="width:25px;height:auto;"></a></div>
+{% endblock %}

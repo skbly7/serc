@@ -1,0 +1,30 @@
+{% extends "lab/calendar.html" %}
+{% load i18n %}
+
+{% block main %}
+<h1>Day view</h1>
+<form action="." method="post">
+    {% csrf_token %}
+    <input class="btn btn-default" type="submit" name="previous" value="{% trans "Previous" %}" />
+    <input class="btn btn-default" type="submit" name="next" value="{% trans "Next" %}" />
+    <input class="btn btn-default" type="submit" name="today" value="{% trans "Today" %}" />
+</form><br/>
+<table class="table calendar-day">
+    <tr>
+        <th>{{ date|date:'D m/d' }}</th>
+    </tr>
+    <tr>
+        {% for occurrence in occurrences %}
+            <td>
+                <p class="alert" style="background-color: #{{ occurrence.event.category.color }}">
+                    <a title="{{ occurrence }}" href="{% url "calendar_occurrence_detail" pk=occurrence.event.pk year=occurrence.start.year month=occurrence.start.month day=occurrence.start.day %}">{{ occurrence|truncatechars:22 }}</a>
+                </p>
+            </td>
+        {% empty %}
+            <td>No event</td>
+        {% endfor %}
+    </tr>
+</table>
+<br/>
+<input class="btn btn-default" onclick="javascript:history.back();" value="{% trans "Back" %}" />
+{% endblock %}
