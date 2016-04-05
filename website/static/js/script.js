@@ -69,23 +69,23 @@ include('/static/js/jquery.easing.1.3.js');
     }
 })(jQuery);
 
-/* SMOOTH SCROLLIG
- ========================================================*/
-;
-(function ($) {
-    var o = $('html');
-    if (o.hasClass('desktop')) {
-        include('/static/js/jquery.mousewheel.min.js');
-        include('/static/js/jquery.simplr.smoothscroll.min.js');
-
-        $(document).ready(function () {
-            $.srSmoothscroll({
-                step: 150,
-                speed: 800
-            });
-        });
-    }
-})(jQuery);
+///* SMOOTH SCROLLIG
+// ========================================================*/
+//;
+//(function ($) {
+//    var o = $('html');
+//    if (o.hasClass('desktop')) {
+//        include('/static/js/jquery.mousewheel.min.js');
+//        include('/static/js/jquery.simplr.smoothscroll.min.js');
+//
+//        $(document).ready(function () {
+//            $.srSmoothscroll({
+//                step: 150,
+//                speed: 800
+//            });
+//        });
+//    }
+//})(jQuery);
 
 /* Copyright Year
  ========================================================*/

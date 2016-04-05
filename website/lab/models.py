@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.encoding import smart_str
 
 # Create your models here.
 
@@ -32,10 +33,14 @@ class SiteTextData(models.Model):
         return self.unique_identifier
 
 
+DISP_CHOICE = ((4, '4 in a row'), (6, '6 in a row'))
+
 class PeopleType(models.Model):
     name = models.CharField(max_length=40)
     display_text = models.CharField(max_length=40)
-    order = models.IntegerField(default=1)
+    show_research_interest = models.BooleanField(default=False)
+    count_in_one_row = models.IntegerField(choices=DISP_CHOICE, default=2)
+    order = models.IntegerField(default=6)
     def __str__(self):
         return self.name
 
@@ -43,7 +48,7 @@ class People(models.Model):
     list_on = models.ForeignKey(PeopleType)
     name = models.CharField(max_length=40)
     title = models.CharField(max_length=100, blank=True)
-    interest = models.TextField()
+    interest = models.TextField(blank=True)
     url = models.CharField(max_length=20, blank=True)
     personal_page = models.BooleanField(default=False)
     short_bio = models.TextField(blank=True)
@@ -51,8 +56,9 @@ class People(models.Model):
     email = models.CharField(max_length=100, blank=True)
     phone = models.CharField(max_length=100, blank=True)
     homepage = models.CharField(max_length=100, blank=True)
-    login = models.OneToOneField(User)
+    login = models.OneToOneField(User, blank=True, null=True)
     img = models.ImageField(upload_to='static/images/people')
+    display_priority = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name
@@ -66,7 +72,7 @@ class ShortNames(models.Model):
     profile = models.ForeignKey(People, blank=True, null=True)
 
     def __str__(self):
-        return self.name
+        return (self.name).encode('ascii', 'ignore')
 
     def display(self):
         if self.profile is None:
@@ -84,13 +90,13 @@ class Publication(models.Model):
     authors_comma_separated = models.CharField(default='', max_length=500)
     conf_type = models.ForeignKey(ConferenceType)
     published_at = models.CharField(max_length=200)
-    published_page = models.CharField(max_length=20)
+    published_page = models.CharField(max_length=20, blank=True)
     published_year = models.IntegerField()
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, unique=True)
     link = models.URLField(blank=True)
 
     def __str__(self):
-        return self.title
+        return smart_str(self.title)
 
     def authors(self):
         list = []
@@ -117,5 +123,26 @@ class ShortNamePublicationMapping(models.Model):
     short_name = models.ForeignKey(ShortNames)
     paper = models.ForeignKey(Publication)
 
+    def __str__(self):
+        return str(self.short_name) + str(self.paper)
 
+class SocialIcon(models.Model):
+    name = models.CharField(max_length=20)
+    link = models.URLField()
+    icon = models.ImageField(upload_to='static/images/social')
+
+    def __str__(self):
+        return (self.name).encode('ascii', 'ignore')
+
+    def view(self):
+        return '<a href="' + self.link + '" target="_blank" alt="' + self.name + '"><img src="/' + str(self.icon) + '" /></a>'
+
+DISP_CHOICE = ((1, 'Type = Link'), (2, 'Type = Project'), (3, 'Type = Courses'), (4, 'Type = Under construction'))
+
+class ResourceType(models.Model):
+    name = models.CharField(max_length=40)
+    url_path = models.CharField(max_length=10, unique=True)
+    order = models.IntegerField(default=0)
+    def __str__(self):
+        return self.name
 

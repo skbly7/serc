@@ -1,24 +1,5 @@
-{% extends "serc/base.html" %}
+{% extends "lab/base.html" %}
 {% block content %}
-    <!--<div id="banner-slide">-->
-        <!--<ul class="bjqs">-->
-        <!--{% for banner in banners %}-->
-            <!--<li><img src="{{banner.img}}"></li>-->
-        <!--{% endfor %}-->
-        <!--</ul>-->
-    <!--</div>-->
-    <!--<script class="secret-source">-->
-        <!--jQuery(document).ready(function($) {-->
-            <!--var divWidth = $('#banner-slide').width();-->
-            <!--$('#banner-slide').bjqs({-->
-                <!--animtype    : 'slide',-->
-                <!--width       : divWidth,-->
-                <!--height      : 400,-->
-                <!--responsive  : true,-->
-                <!--randomstart : true-->
-            <!--});-->
-        <!--});-->
-    <!--</script>-->
     <section class="camera_container">
     <div id="camera" class="camera_wrap">
     {% for banner in banners %}
@@ -29,7 +10,7 @@
     <section class="well1">
         <div class="container">
             <div class="row">
-                <div class="grid_8">
+                <div class="grid_8" style="text-align: justify">
                     <h2>About</h2>
                     {{homepage|safe}}
                 </div>
@@ -52,7 +33,6 @@
                         </dl>
                     </div>
                     <div class="archive"><a href="{% url 'archive' %}"><i class="fa fa-archive" ></i>Archive</a></div>
-                    {% render_upcoming_events %}
                 </div>
             </div>
         </div>

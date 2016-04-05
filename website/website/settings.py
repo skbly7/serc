@@ -38,7 +38,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'lab',
-    'django_cas'
+    'django_cas',
+    'filer',
+    'mptt',
+    'easy_thumbnails',
+    'calendarium',
+    'django.contrib.sites',
+    'django.contrib.humanize',
+    'sekizai',
+    'wiki'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -72,6 +80,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'lab.context_processor.template_globals',
+                'django.core.context_processors.request'
             ],
         },
     },
@@ -121,7 +130,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = False
+USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
@@ -135,3 +144,12 @@ CAS_SERVER_URL = 'https://login.iiit.ac.in/cas/'
 CAS_REDIRECT_URL = '/'
 CAS_AUTO_CREATE_USERS = True
 CAS_RENEW = True
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/var/tmp/django_cache',
+    }
+}
+
+SITE_ID = 1

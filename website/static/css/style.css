@@ -240,10 +240,14 @@ p + .btn_wr {
 .brand_slogan {
   display: inline-block;
   padding-left: 10px;
-  padding-bottom: 5px;
-  font-size: 24px;
+  padding-bottom: 10px;
+  font-size: 30px;
   letter-spacing: -1px;
   vertical-align: bottom;
+}
+.brand_slogan a,
+.brand_slogan a:hover {
+  text-decoration: none;
 }
 .search_box input[type="text"]{
   border-radius: 6px;
@@ -1207,9 +1211,13 @@ header .brand {
   float: left;
 }
 header .search_box,
+header .college-logo,
 header .container > p {
   clear: right;
   float: right;
+}
+.college-logo img {
+  height: 99px;
 }
 header .search_box {
   margin-top: 7px;
@@ -1259,8 +1267,9 @@ header .search_box + p {
 =========================================================*/
 main {
   display: block;
-  min-height: 500px;
-  background: #F3F3F3;
+  min-height: 600px;
+  height: 100%;
+  background: #fff;
 }
 main .container.hr {
   padding-bottom: 50px;
@@ -1487,19 +1496,44 @@ footer .copyright a:hover {
        }
 }
 
-.peoples img {
+.compact-hr {
+  margin-top:10px
+}
+
+.grid_3.peoples img {
   width: 100%;
-  height: 200px;
+  max-height: 250px;
+  min-height: 250px;
   border: 2px solid;
 }
-.peoples h4 {
+.grid_3.peoples h4 {
   padding-top: 10px;
   padding-left: 5px;
 }
-.peoples h4 a {
+.grid_3.peoples h4 a {
   color: #0b1599;
 }
-.peoples span {
+.grid_3.peoples span {
+  clear: both;
+  padding-left:5px;
+}
+
+.grid_2.peoples img {
+  width: 100%;
+  max-height: 170px;
+  min-height: 170px;
+  border: 2px solid;
+}
+.grid_2.peoples h4 {
+  padding-top: 2px;
+  padding-left: 2px;
+  margin-bottom: 7px;
+  font-size: 16px;
+}
+.grid_2.peoples h4 a {
+  color: #0b1599;
+}
+.grid_2.peoples span {
   clear: both;
   padding-left:5px;
 }
@@ -1546,7 +1580,7 @@ footer .copyright a:hover {
 }
 .image_personal img {
   width: 100%;
-  max-height: 200px;
+  max-height: 270px;
 }
 .small_margins {
   margin: 5px 0px;
@@ -1569,4 +1603,119 @@ footer .copyright a:hover {
 }
 .authors a {
   color: #0b1599;
+}
+.alert-error {
+  color: red;
+}
+
+.calendar-view .btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  margin-top: 0px;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.calendar-view .btn:focus,
+.calendar-view .btn:active:focus,
+.calendar-view .btn.active:focus,
+.calendar-view .btn.focus,
+.calendar-view .btn:active.focus,
+.calendar-view .btn.active.focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.calendar-view .btn:hover,
+.calendar-view .btn:focus,
+.calendar-view .btn.focus {
+  color: #333;
+  text-decoration: none;
+}
+.calendar-view .btn:active,
+.calendar-view .btn.active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+          box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+.calendar-view .btn-default {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+}
+.calendar-view .btn-default:focus,
+.calendar-view .btn-default.focus {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #8c8c8c;
+}
+.calendar-view .btn-default:hover {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+.calendar-view .btn-default:active,
+.calendar-view .btn-default.active,
+.open > .dropdown-toggle.calendar-view .btn-default {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+.calendar-view .btn-default:active:hover,
+.calendar-view .btn-default.active:hover,
+.open > .dropdown-toggle.calendar-view .btn-default:hover,
+.calendar-view .btn-default:active:focus,
+.calendar-view .btn-default.active:focus,
+.open > .dropdown-toggle.calendar-view .btn-default:focus,
+.calendar-view .btn-default:active.focus,
+.calendar-view .btn-default.active.focus,
+.open > .dropdown-toggle.calendar-view .btn-default.focus {
+  color: #333;
+  background-color: #d4d4d4;
+  border-color: #8c8c8c;
+}
+.calendar-view .btn-default:active,
+.calendar-view .btn-default.active,
+.open > .dropdown-toggle.calendar-view .btn-default {
+  background-image: none;
+}
+.calendar-view .btn-default.disabled:hover,
+.calendar-view .btn-default[disabled]:hover,
+fieldset[disabled] .calendar-view .btn-default:hover,
+.calendar-view .btn-default.disabled:focus,
+.calendar-view .btn-default[disabled]:focus,
+fieldset[disabled] .calendar-view .btn-default:focus,
+.calendar-view .btn-default.disabled.focus,
+.calendar-view .btn-default[disabled].focus,
+fieldset[disabled] .calendar-view .btn-default.focus {
+  background-color: #fff;
+  border-color: #ccc;
+}
+.calendar-view .btn-default .badge {
+  color: #fff;
+  background-color: #333;
+}
+.calendar-view h1 {
+  font-size: 20px;
+}
+.calendar-view form {
+  padding-top: 5px;
+}
+.btn-default {
+  margin-top: 32px;
 }

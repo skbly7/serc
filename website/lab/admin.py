@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import News, Banner, SiteTextData, PeopleType, People, Publication, ConferenceType, ShortNames
+from .models import *
 from django.utils import timezone
 # Register your models here.
 
@@ -11,3 +11,5 @@ admin.site.register(PeopleType)
 admin.site.register(Publication)
 admin.site.register(ConferenceType)
 admin.site.register(ShortNames)
+admin.site.register(SocialIcon)
+admin.site.register(ResourceType)

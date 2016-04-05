@@ -1,4 +1,4 @@
-{% extends "serc/base.html" %}
+{% extends "lab/base.html" %}
 {% block content %}
     <section class="well1 ins3">
         <div class="container">
@@ -68,7 +68,11 @@
         (function ($) {
             function publicationWriter(rowIndex, record, columns, cellWriter) {
             var cssClass = "span4", li;
-            li = '<div><li class="' + cssClass + '"><span class="authors">' + record.authors + '</span>: <span class="title">"' + record.title + '"</span> <span class="location">' + record.location + '</span> (pp. <span class="page">' + record.page + '</span>) <a href="' + record.link + '" target="_blank" rel="nofollow" class="link" '+ record.link_present +'><i class="fa fa-external-link"></i></a></div>';
+            li = '<div><li class="' + cssClass + '"><span class="authors">' + record.authors + '</span>: <span class="title">"' + record.title + '"</span> <span class="location">' + record.location + '</span> ';
+            if(record.page !== "") {
+                li += '(pp. <span class="page">' + record.page + '</span>) ';
+            }
+            li +='<a href="' + record.link + '" target="_blank" rel="nofollow" class="link" '+ record.link_present +'><i class="fa fa-external-link"></i></a></div>';
             return li;
         }
 
@@ -84,8 +88,6 @@
                 var link = "#";
                 var present = "style='display: none;'";
             }
-            console.log(link);
-            console.log(present);
             record.authors = $li.find('.authors').html();
             record.title = $li.find('.title').text();
             record.location = $li.find('.location').text();

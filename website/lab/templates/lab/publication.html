@@ -1,11 +1,11 @@
-{% extends "serc/base.html" %}
+{% extends "lab/base.html" %}
 {% block content %}
     <section class="well1">
         <div class="container">
             <div class="row off1">
                 <div class="grid_12">
                     <h2>Research</h2>
-                    To lead the software engineering research in India by addressing India specific issues in an industry driven environment.The SERL is a research and development center at IIIT Hyderabad conducting research in various domains of software engineering. The main objectives of SERL are to promote quality software development at universities through University Software Development Center and to operate closely with the industry by estabilishing touch points.
+                    To lead the software engineering research in India by addressing India specific issues in an industry driven environment.The SERC is a research and development center at IIIT Hyderabad conducting research in various domains of software engineering. The main objectives of SERC are to promote quality software development at universities through University Software Development Center and to operate closely with the industry by estabilishing touch points.
                     <hr>
                     <h3>Publications</h3>
                     {% for category, publications in publications_organized.items %}
@@ -30,7 +30,11 @@
         (function ($) {
             function publicationWriter(rowIndex, record, columns, cellWriter) {
             var cssClass = "span4", li;
-            li = '<div><li class="' + cssClass + '"><span class="authors">' + record.authors + '</span>: <span class="title">"' + record.title + '"</span> <span class="location">' + record.location + '</span> (pp. <span class="page">' + record.page + '</span>) <a href="' + record.link + '" target="_blank" rel="nofollow" class="link" '+ record.link_present +'><i class="fa fa-external-link"></i></a></div>';
+            li = '<div><li class="' + cssClass + '"><span class="authors">' + record.authors + '</span>: <span class="title">"' + record.title + '"</span> <span class="location">' + record.location + '</span> ';
+            if(record.page !== "") {
+                li += '(pp. <span class="page">' + record.page + '</span>) ';
+            }
+            li +='<a href="' + record.link + '" target="_blank" rel="nofollow" class="link" '+ record.link_present +'><i class="fa fa-external-link"></i></a></div>';
             return li;
         }
 
