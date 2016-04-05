@@ -1,0 +1,40 @@
+{% extends "lab/base.html" %}
+{% block content %}
+<section class="well1">
+            {% load sekizai_tags i18n wiki_tags %}
+    <link href="{{ STATIC_URL }}wiki/bootstrap/css/wiki-bootstrap.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}wiki/bootstrap/css/github-markdown.css" rel="stylesheet">
+    {% block wiki_body %}
+
+
+    <div class="container">
+      {% if messages %}
+        <!-- Messages for this instance -->
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">
+            <a class="close" data-dismiss="alert" href="#">&times;</a>
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+
+      <!-- Reserved for breadcrumbs -->
+      {% block wiki_breadcrumbs %}{% endblock %}
+
+      <!-- Main page contents go here -->
+      {% block wiki_contents %}{% endblock %}
+
+      </div>
+
+    </div> <!-- /container -->
+
+    {% endblock wiki_body %}
+
+    <script src="{{ STATIC_URL }}wiki/js/jquery.min.js"></script>
+    <script src="{{ STATIC_URL }}wiki/js/core.js"></script>
+    <script src="{{ STATIC_URL }}wiki/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Optionally enable responsive features in IE8 -->
+    <script src="{{ STATIC_URL }}wiki/js/respond.min.js"></script>
+
+</section>
+{% endblock content %}
