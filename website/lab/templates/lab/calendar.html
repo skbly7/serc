@@ -1,0 +1,18 @@
+{% extends "lab/base.html" %}
+{% load staticfiles %}
+{% block title_append %}
+Event Calender
+{% endblock title_append %}
+{% block content %}
+<link rel="stylesheet" href="{% static "calendarium/css/calendar.css" %}">
+<section class="well1">
+    <div class="container">
+        <div class="row">
+            <div class="grid_12 calendar-view">
+                <h2>Events calender</h2><hr class="compact-hr">
+                {% block main %}{% endblock main %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
