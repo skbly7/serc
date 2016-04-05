@@ -1,0 +1,20 @@
+Django==1.9.4
+django-calendarium==1.3.3
+django-classy-tags==0.7.2
+-e git+git://github.com/KTHse/django-cas2#egg=django_cas
+django-filer==1.1.1
+django-mptt==0.8.3
+django-polymorphic==0.8.1
+django-realtime==1.1
+django-sekizai==0.9.0
+easy-thumbnails==2.3
+icalendar==3.9.2
+Markdown==2.6.6
+Pillow==3.1.1
+python-dateutil==2.5.2
+pytz==2015.7
+requests==2.5.3
+simplejson==3.8.2
+six==1.10.0
+Unidecode==0.4.19
+xmltodict==0.10.1
