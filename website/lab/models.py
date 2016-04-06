@@ -94,6 +94,7 @@ class Publication(models.Model):
     published_year = models.IntegerField()
     title = models.CharField(max_length=200, unique=True)
     link = models.URLField(blank=True)
+    disabled = models.BooleanField(default=False)
 
     def __str__(self):
         return smart_str(self.title)

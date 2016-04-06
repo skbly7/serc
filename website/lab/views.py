@@ -94,6 +94,8 @@ def personal(request, name):
     for publication in publications:
         try:
             publication = Publication.objects.get(pk=publication)
+            if publication.disabled == True:
+                raise PublicationNotEnabled
         except:
             continue
         if publication.conf_type.name not in publications_organized:
@@ -119,10 +121,6 @@ def research(request):
 def flush(request):
     if request.user.is_superuser:
         cache.clear()
-        # For DB based cache, if needed in future
-        # cursor = connections['cache_database'].cursor()
-        # cursor.execute('DELETE FROM cache_table')
-        # transaction.commit_unless_managed(using='cache_database')
         return HttpResponse('Done! :)')
     return HttpResponse('Why don\'t you try after logging in ?')
 
@@ -139,7 +137,7 @@ def events(request):
 # @cache_page(60 * 2)
 def publications(request):
     template = loader.get_template('lab/publication.html')
-    publications = Publication.objects.all()
+    publications = Publication.objects.all().filter(disabled=False)
     publications_organized = {}
     for publication in publications:
         if publication.conf_type.name not in publications_organized:
