@@ -1,0 +1,4 @@
+sudo yum install python-devel
+sudo yum install zlib-devel
+sudo yum install libjpeg-turbo-devel
+sudo yum install sqlite-devel
