@@ -23,7 +23,7 @@ def custom_404(request):
     })
     return HttpResponse(data, content_type='application/json')
 
-# @cache_page(60 * 2)
+@cache_page(60)
 def news(request):
     objects = News.objects.all()
     data = []
@@ -37,7 +37,7 @@ def news(request):
             })
     return HttpResponse(json.dumps(data), content_type='application/json')
 
-# @cache_page(60 * 2)
+@cache_page(60)
 def index(request):
     template = loader.get_template('lab/index.html')
     banners = Banner.objects.all().filter(is_active=True)
@@ -52,7 +52,7 @@ def index(request):
     }
     return HttpResponse(template.render(context, request))
 
-# @cache_page(60 * 2)
+@cache_page(60)
 def people(request, type):
     template = loader.get_template('lab/people.html')
     try:
@@ -81,7 +81,7 @@ def people_organized_call(type):
             people_organized.pop(type.display_text, None)
     return people_organized
 
-# @cache_page(60 * 2)
+@cache_page(60)
 def personal(request, name):
     template = loader.get_template('lab/personal.html')
     try:
@@ -134,7 +134,7 @@ def events(request):
     return HttpResponse(template.render(context, request))
 
 
-# @cache_page(60 * 2)
+@cache_page(60)
 def publications(request):
     template = loader.get_template('lab/publication.html')
     publications = Publication.objects.all().filter(disabled=False)
@@ -152,7 +152,7 @@ def publications(request):
     }
     return HttpResponse(template.render(context, request))
 
-# @cache_page(60 * 2)
+@cache_page(60)
 def archive(request):
     template = loader.get_template('lab/archive.html')
     context = {
@@ -162,7 +162,6 @@ def archive(request):
     return HttpResponse(template.render(context, request))
 
 
-# @cache_page(60 * 2)
 def contact(request):
     template = loader.get_template('lab/contact.html')
     if request.method == 'GET':
