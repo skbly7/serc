@@ -23,7 +23,6 @@ for publication in all_publication:
     if type == "article":
         other_info = publication[type]
         type = 1
-        year = other_info['@mdate'].split('-')[0]
         if isinstance(other_info['author'], list):
             authors_comma_separated = ', '.join(other_info['author'])
         else:
@@ -40,7 +39,6 @@ for publication in all_publication:
     if type == "inproceedings":
         other_info = publication[type]
         type = 2
-        year = other_info['@mdate'].split('-')[0]
         if isinstance(other_info['author'], list):
             authors_comma_separated = ', '.join(other_info['author'])
         else:
@@ -54,7 +52,6 @@ for publication in all_publication:
     if type == "proceedings":
         other_info = publication[type]
         type = 4
-        year = other_info['@mdate'].split('-')[0]
         if isinstance(other_info['editor'], list):
             authors_comma_separated = ', '.join(other_info['editor'])
         else:
@@ -72,6 +69,7 @@ for publication in all_publication:
         url = other_info['ee']
     except:
         url = 'http://dblp.uni-trier.de/' + other_info['url']
+    year = other_info['year']
     if isinstance(url, list):
         url = url[0]
     type = ConferenceType.objects.get(id=type)
