@@ -1719,3 +1719,9 @@ fieldset[disabled] .calendar-view .btn-default.focus {
 .btn-default {
   margin-top: 32px;
 }
+.personal_page b {
+  font-weight: bold;
+}
+.personal_page i {
+  font-style: italic;
+}
