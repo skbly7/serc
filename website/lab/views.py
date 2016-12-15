@@ -102,8 +102,27 @@ def personal(request, name):
             publications_organized[publication.conf_type.name] = []
         publications_organized[publication.conf_type.name].append(publication)
     # Sorting for year wise paper display
+
     for key in publications_organized:
-        publications_organized[key].sort(key=lambda x: x.published_year, reverse=True)
+        s=sorted(publications_organized[key], key=lambda x: x.published_year, reverse=True)
+        f=[]
+        p=[]
+        k=s[0].published_year
+        for l in s:
+        	if l.published_year == k:
+        		f.append(l)
+        	else:
+        		m=sorted(f, key=lambda x: x.id, reverse=True)
+        		for g in m:
+        			p.append(g)
+        		f=[]
+        		f.append(l)
+        		k=l.published_year
+        m=sorted(f, key=lambda x: x.id, reverse=True)
+        for g in m:
+        	p.append(g)
+        publications_organized[key]=p
+    
     context = {
         'PAGE_TITLE': person_object.name,
         'person': person_object,
@@ -145,7 +164,25 @@ def publications(request):
         publications_organized[publication.conf_type.name].append(publication)
     # Sorting for year wise paper display
     for key in publications_organized:
-        publications_organized[key].sort(key=lambda x: x.published_year, reverse=True)
+        s=sorted(publications_organized[key], key=lambda x: x.published_year, reverse=True)
+        f=[]
+        p=[]
+        k=s[0].published_year
+        for l in s:
+        	if l.published_year == k:
+        		f.append(l)
+        	else:
+        		m=sorted(f, key=lambda x: x.id, reverse=True)
+        		for g in m:
+        			p.append(g)
+        		f=[]
+        		f.append(l)
+        		k=l.published_year
+        m=sorted(f, key=lambda x: x.id, reverse=True)
+        for g in m:
+        	p.append(g)
+        publications_organized[key]=p
+        
     context = {
         'PAGE_TITLE': 'Publications',
         'publications_organized': publications_organized
