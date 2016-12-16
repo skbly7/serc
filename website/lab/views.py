@@ -104,7 +104,8 @@ def personal(request, name):
     # Sorting for year wise paper display
 
     for key in publications_organized:
-        publications_organized[key].sort( key=lambda x: (x.published_year, x.id), reverse=True)
+        publications_organized[key].sort( key=lambda x: (x.published_year, x.id), reverse=False)
+        publications_organized[key].reverse()
     
     context = {
         'PAGE_TITLE': person_object.name,
@@ -147,7 +148,8 @@ def publications(request):
         publications_organized[publication.conf_type.name].append(publication)
     # Sorting for year wise paper display
     for key in publications_organized:
-        publications_organized[key].sort( key=lambda x: (x.published_year, x.id), reverse=True)
+        publications_organized[key].sort( key=lambda x: (x.published_year, x.id), reverse=False)
+        publications_organized[key].reverse()
         
     context = {
         'PAGE_TITLE': 'Publications',
